@@ -5,7 +5,7 @@ import icc.pap.u1.patrones.creacionales.SingletonDemo;
 public class App {
 
     public static void main(String[] args) {
-        runSingleton();
+        runSingleton();//Corre el programa
     }
 
     public static void runSingleton() {
