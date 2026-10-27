@@ -8,6 +8,7 @@ public class App {
 
     public static void main(String[] args) {
         runSingleton();//Corre el programa
+        //runFactoryMethod();
         runBuilder();
     }
 
@@ -20,6 +21,15 @@ public class App {
 
         System.out.println("¿Son la misma instancia? " + (c1 == c2));
     }
+
+    // private static void runFactoryMethod() {
+    //     Importador impPC = new ImportadorPuntoComa();
+    //     Importador impT = new ImportadorTabulacion();
+    //     // implemeto el crearLector()
+    //     // para devolver LecturaPuntoComa
+    //     System.out.println(impPC.importacion(List.of("S01;22.5;C", "S02;18;C")));
+    //     System.out.println(impT.importacion(List.of("S01\t22\tC", "S02\t18\tC")));
+    // }
 
     
     private static void runBuilder() {
