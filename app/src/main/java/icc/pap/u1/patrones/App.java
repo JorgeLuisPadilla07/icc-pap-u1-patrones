@@ -1,5 +1,9 @@
 package icc.pap.u1.patrones;
 
+import icc.Practica.gestionpedidos.Configuracion;
+import icc.Practica.gestionpedidos.FabricaDigital;
+import icc.Practica.gestionpedidos.FabricaPedido;
+import icc.Practica.gestionpedidos.FabricaTienda;
 import icc.pap.u1.patrones.creacionales.SingletonDemo;
 import icc.pap.u1.patrones.creacionales.builder.Pizza;
 import icc.pap.u1.patrones.creacionales.builder.PizzaBuilder;
@@ -7,9 +11,34 @@ import icc.pap.u1.patrones.creacionales.builder.PizzaBuilder;
 public class App {
 
     public static void main(String[] args) {
-        runSingleton();//Corre el programa
+        //runSingleton();//Corre el programa
         //runFactoryMethod();
-        runBuilder();
+        //runBuilder();
+        runPedidos();//Trabajo
+    }
+
+    private static void runPedidos(){
+        // Singleton: obtenemos la configuración
+        Configuracion config = Configuracion.getInstancia();
+        System.out.println("Configuración del sistema");
+        System.out.println("Impuesto: " + config.getImpuesto() + "%");
+
+        // Factory Method: una fábrica por cada tipo de pedido
+        FabricaPedido fabricaTienda = new FabricaTienda();
+        FabricaPedido fabricaDigital = new FabricaDigital();
+
+        System.out.println();
+        System.out.println("--- Pedido presencial ---");
+        fabricaTienda.registrarYProcesar("P001", "Ana Torres", 100.00);
+
+        System.out.println();
+        System.out.println("--- Pedido en línea ---");
+        fabricaDigital.registrarYProcesar("P002", "Juan Pérez", 200.00);
+
+        // Comprobamos que es la misma instancia
+        Configuracion otra = Configuracion.getInstancia();
+        System.out.println();
+        System.out.println("Configuración compartida: " + (config == otra));
     }
 
     public static void runSingleton() {
