@@ -1,16 +1,16 @@
 package icc.Estructurales.simple.adapter;
 
 public class AdaptadorCargadorIna implements Cargador {
-    
-    private final CargadorInalambrico cInalambrico;
 
-    public AdaptadorCargadorIna(){
-        
-    }
+private final CargadorInalambrico cInalambrico;
 
-    @Override 
-    public void cargarCelular() {
-        
-    }
-    
+public AdaptadorCargadorIna(CargadorInalambrico cInalambrico) {
+    this.cInalambrico = cInalambrico;
+}
+
+@Override
+public void cargarCelular() {
+    cInalambrico.cargarBase();
+}
+
 }

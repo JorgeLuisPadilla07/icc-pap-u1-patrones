@@ -1,19 +1,16 @@
 package icc.Estructurales.simple.adapter;
 
 public class AdaptadorCargador implements Cargador {
-    
 
-    //dependencia del cargador(antiguo)
-    private final CargadorAntiguo cargadorAntiguo;
+private final CargadorAntiguo cargadorAntiguo;
 
+public AdaptadorCargador(CargadorAntiguo cargadorAntiguo) {
+    this.cargadorAntiguo = cargadorAntiguo;
+}
 
-    public AdaptadorCargador() {
-        this.cargadorAntiguo = new CargadorAntiguo();
-    }
+@Override
+public void cargarCelular() {
+    cargadorAntiguo.cargarConector();
+}
 
-    @Override
-    public void cargarCelular() {
-        cargadorAntiguo.cargarConector();
-    }
-    
 }
