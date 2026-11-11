@@ -1,36 +1,37 @@
 package icc.comportamiento.observer;
 
-import java.util.List;
-import java.util.function.Consumer;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer; //clase que JAVA ya tiene GUARDADA
 
 public class Producto {
-
+    
+    public final List<Consumer<CambioProducto>> observadores;
+    //le cambio a Consumer de tipo 
+    
     private String codigo;
-    private Double precio;
+    private double precio;
     private String nombre;
 
-    public final List<Consumer<CambioProducto>> observadores;
-
-    public Producto(String codigo, Double precio, String nombre) {
+    public Producto(String codigo, double precio, String nombre){
         this.codigo = codigo;
         this.precio = precio;
         this.nombre = nombre;
         this.observadores = new ArrayList<>();
     }
 
-    public Producto() {
-        this.observadores = new ArrayList<>();
+    public void suscribir(Consumer<CambioProducto> observador){
+        observadores.add(observador);
     }
 
-    public void suscribir(Consumer<CambioProducto> observador) {
-        this.observadores.add(observador);
-    }
-
-    private void notifyAll(CambioProducto p) {
-        for (Consumer<CambioProducto> observador : observadores) {
-            observador.accept(p);
+    private void notifyAll(CambioProducto producto){ //notifica a todos los consumidores
+        for(Consumer<CambioProducto> observador : observadores){
+            observador.accept(producto);
         }
+    }
+
+    public List<Consumer<CambioProducto>> getObservadores() {
+        return observadores;
     }
 
     public String getCodigo() {
@@ -38,32 +39,41 @@ public class Producto {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
-        String cod0ld = this.codigo;
-        CambioProducto cP = new CambioProducto(this, "codigo", cod0ld, codigo);
+        String codigoOld = this.codigo;
+        this.codigo = codigo; //respaldo el dato ANTERIOR, antes de que haya un nuevo codigo, hay un viejo codigo
 
-        notifyAll(cP);
+        CambioProducto cProd = new CambioProducto(this, "codigo", codigoOld , codigo); //se guarda el codigo viejo
+        notifyAll(cProd);
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    //public void setPrecio(Double precio) {
-    //    this.precio = precio;
-    //    notifyAll();
-    //}
+    public void setPrecio(double precio) {
+        double precioOld = this.precio;
+        this.precio = precio;
+
+        CambioProducto cProd = new CambioProducto(this, "precio", precioOld, precio);
+        notifyAll(cProd);
+        //notifyAll(this);
+    }
 
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
+        String nombreOld = this.nombre;
         this.nombre = nombre;
-        notifyAll();
+
+        CambioProducto cProd = new CambioProducto(this, "nombre", nombreOld, nombre);
+        notifyAll(cProd);
+        //notifyAll(this);
     }
 
-    public List<Consumer<CambioProducto>> getObservadores() {
-        return observadores;
+    @Override
+    public String toString() {
+        return "Producto [codigo=" + codigo      + ", precio=" + precio     + ", nombre=" + nombre + "]";
     }
 }
