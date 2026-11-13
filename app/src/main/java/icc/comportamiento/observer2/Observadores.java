@@ -1,5 +1,5 @@
 
-package icc.comportamiento.observer;
+package icc.comportamiento.observer2;
 
 import java.util.function.Consumer;
 

@@ -1,4 +1,4 @@
-package icc.comportamiento.observer;
+package icc.comportamiento.observer2;
 
 public record CambioEstudiante(
         Estudiante estudiante,

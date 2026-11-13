@@ -1,6 +1,10 @@
 
 package icc.comportamiento.observer;
 
+import icc.comportamiento.observer2.EstadoMatricula;
+import icc.comportamiento.observer2.Estudiante;
+import icc.comportamiento.observer2.Observadores;
+
 public class AppObserver {
 
     public static void main(String[] args) {
